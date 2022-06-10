@@ -1,0 +1,42 @@
+﻿@model MenuViewModel
+<h1> Ecco i dettagli del menu nr.@Model.Id - @Model.Name :</h1>
+
+<br />
+
+<table class="table table-hover table-bordered table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Categoria</th>
+            <th>Descrizione</th>
+            <th>Prezzo</th>
+
+            @*@if (User.IsInRole("Administrator"))
+            {
+                <th></th>
+
+            }*@
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Dishes)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Name</td>
+                <td>@item.KindOfDish</td>
+                <td>@item.Description</td>
+                <td>@item.Price</td>
+                @*@if (User.IsInRole("Administrator"))
+                {
+                    <td>
+                        <a asp-controller="Dishes" asp-action="RemoveFromMenu" asp-route-id="@item.Id" class="btn btn-primary">Visualizza Dettagli</a>
+                    </td>
+                }*@
+            </tr>
+        }
+    </tbody>
+
+</table>

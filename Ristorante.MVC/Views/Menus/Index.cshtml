@@ -1,0 +1,37 @@
+﻿@model ICollection<MenuViewModel>
+<h1>Ecco la lista dei Menu</h1>
+
+@if (User.IsInRole("Administrator"))
+{
+   <a type=button class="btn btn-primary" asp-controller="Menus" asp-action="Create">Inserisci nuovo menu</a> 
+}
+
+<table class="table table-hover table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            @if (User.IsInRole("Administrator"))
+            {
+                <th></th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Name</td>
+                <td> 
+                   <a asp-controller="Menus" asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary">Sfoglia il Menu</a>
+                   @if (User.IsInRole("Administrator"))
+                   {
+                        @*<a asp-controller="Menus" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Modifica</a>*@
+                        <a asp-controller="Menus" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Elimina</a>
+                   } 
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
